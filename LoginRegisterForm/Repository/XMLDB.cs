@@ -15,11 +15,21 @@ namespace LoginRegisterForm.Repository
 
     public class XMLDB
     {
-        public DBSet<Product> Products { get; set; }
         public DBSet<User> Users { get; set; }
         public static readonly string XML_STORE = "xmlstore";
 
-        public XMLDB()
+        private static XMLDB _instance;
+        public static XMLDB Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new XMLDB();
+                return _instance;
+            }
+        }
+
+        private XMLDB()
         {
             var xmlDir = Path.Combine(Environment.CurrentDirectory, XML_STORE);
             if (!Directory.Exists(xmlDir))
@@ -75,7 +85,7 @@ namespace LoginRegisterForm.Repository
             {
                 m_doc = new XDocument();
                 //add root element
-                m_doc.Add(new XElement(m_type.Name + "s"));
+                m_doc.Add(new XElement(m_type.Name + "s", new XAttribute("LastId", "0")));
                 Debug.WriteLine("加载XDocument 失败", e);
             }
         }
@@ -85,11 +95,51 @@ namespace LoginRegisterForm.Repository
             var newElement = new XElement(m_type.Name);
             foreach (var filed in m_type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
+                if (filed.Name.ToLower() == "id")
+                    continue;
                 var property = new XElement(filed.Name);
-                property.Value = filed.GetValue(entity).ToString();
+                property.Value = filed.GetValue(entity)?.ToString() ?? "";
                 newElement.Add(property);
             }
+            //add Id element
+            var lastId = int.Parse(m_doc.Root.Attribute("LastId").Value);
+            lastId++;
+            m_doc.Root.Attribute("LastId").Value = lastId.ToString();
+            newElement.Add(new XElement("Id", lastId));
+
             m_doc.Root.Add(newElement);
+        }
+
+        public void Delete(int id)
+        {
+            var delete_element = m_doc.Root.Elements(typeof(T).Name)
+                                          .Where(e => e.Element("Id").Value == id.ToString())
+                                          .SingleOrDefault();
+            if(delete_element != null)
+            {
+                delete_element.Remove();
+            }
+        }
+
+        public void Update(int id, T entity)
+        {
+            var oldElement = m_doc.Root.Elements(typeof(T).Name)
+                                          .Where(e => e.Element("Id").Value == id.ToString())
+                                          .SingleOrDefault();
+            if(oldElement != null)
+            {
+                var newElement = new XElement(m_type.Name);
+                foreach (var filed in m_type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                {
+                    if (filed.Name.ToLower() == "id")
+                        continue;
+                    var property = new XElement(filed.Name);
+                    property.Value = filed.GetValue(entity)?.ToString() ?? "";
+                    newElement.Add(property);
+                }
+                newElement.Add(new XElement("Id", id));
+                oldElement.ReplaceWith(newElement);
+            }
         }
 
 
@@ -112,7 +162,7 @@ namespace LoginRegisterForm.Repository
     public class DBSetEnumerator<T> : IEnumerator<T>
     {
         List<T> m_items;
-        int m_index;
+        int m_index = -1;
         public DBSetEnumerator(XDocument doc)
         {
             m_items = new List<T>();
@@ -122,8 +172,12 @@ namespace LoginRegisterForm.Repository
                 var type = typeof(T);
                 foreach (var property in type.GetProperties())
                 {
-                    var value = item.Element(property.Name).Value;
-                    property.SetValue(instance, Convert.ChangeType(value, property.PropertyType));
+                    var ele = item.Element(property.Name);
+                    if(ele != null)
+                    {
+                        var value = item.Element(property.Name).Value;
+                        property.SetValue(instance, Convert.ChangeType(value, property.PropertyType));
+                    }
                 }
                 m_items.Add(instance);
             }

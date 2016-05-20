@@ -7,13 +7,26 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="300" >
     <Canvas>
-        <Label Canvas.Left="10" Canvas.Top="32">用户名:</Label>
-        <TextBox x:Name="userNameBox" Height="20" Width="251" Canvas.Left="10" Canvas.Top="62"></TextBox>
-        <Label Canvas.Left="10" Canvas.Top="82">密码:</Label>
-        <PasswordBox x:Name="passwordBox" Height="21" Width="251" Canvas.Left="10" Canvas.Top="107"></PasswordBox>
-        <Label Canvas.Left="10" Canvas.Top="128">密码确认:</Label>
-        <PasswordBox x:Name="passwordConfirmBox" Height="21" Width="251" Canvas.Left="10" Canvas.Top="153"></PasswordBox>
-        <Button Canvas.Left="187" Canvas.Top="188">重置</Button>
-        <Button Canvas.Left="233" Canvas.Top="188">注册</Button>
+        <Label Canvas.Left="10" Canvas.Top="10">用户名:</Label>
+        <TextBox x:Name="userNameBox" Height="20" Width="251" Canvas.Left="10" Canvas.Top="35" Validation.ErrorTemplate="{StaticResource validationTemplate}">
+            <TextBox.Text>
+                <Binding Path="UserName" >
+                    <Binding.ValidationRules>
+                        <NotifyDataErrorValidationRule  />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Canvas.Left="10" Canvas.Top="77">密码:</Label>
+        <TextBox x:Name="passwordBox" Height="21" Width="251" Canvas.Left="10" Canvas.Top="102"  
+                 Text="{Binding Path=Password, ValidatesOnNotifyDataErrors=True}" 
+                 Validation.ErrorTemplate="{StaticResource validationTemplate}"/>
+
+        <Label Canvas.Left="10" Canvas.Top="141">密码确认:</Label>
+        <TextBox x:Name="passwordConfirmBox" Height="21" Width="251" Canvas.Left="10" Canvas.Top="171" 
+                 Text="{Binding Path=PasswordConfirm, ValidatesOnNotifyDataErrors=True}" 
+                 Validation.ErrorTemplate="{StaticResource validationTemplate}" />
+        <Button Canvas.Left="184" Canvas.Top="215" x:Name="reset" Click="reset_Click">重置</Button>
+        <Button Canvas.Left="233" Canvas.Top="215" x:Name="register" Click="register_Click" RenderTransformOrigin="0.607,2.368">注册</Button>
     </Canvas>
 </UserControl>

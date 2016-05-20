@@ -8,10 +8,13 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Canvas>
         <Label Canvas.Left="1" Canvas.Top="47">用户名:</Label>
-        <TextBox x:Name="userNameBox" Width="235" Canvas.Left="55" Canvas.Top="42" Height="30" />
-        <Label Canvas.Left="8" Canvas.Top="87">密码:</Label>
-        <PasswordBox x:Name="passwordBox" Height="26" Width="235" Canvas.Left="55" Canvas.Top="87" />
-        <Button Canvas.Left="225" Canvas.Top="127">重置</Button>
-        <Button Canvas.Left="262" Canvas.Top="127">登陆</Button>
+        <TextBox x:Name="userNameBox" Width="235" Canvas.Left="55" Canvas.Top="42" Height="30" 
+                 Text="{Binding UserName, ValidatesOnNotifyDataErrors=True}"
+                 Validation.ErrorTemplate="{StaticResource validationTemplate}"/>
+        <Label Canvas.Left="10" Canvas.Top="112">密码:</Label>
+        <TextBox x:Name="passwordBox" Height="26" Width="235" Canvas.Left="55" Canvas.Top="111"  Text="{Binding Path=Password, ValidatesOnNotifyDataErrors=True}"
+                 Validation.ErrorTemplate="{StaticResource validationTemplate}"/>
+        <Button Canvas.Left="167" Canvas.Top="159" x:Name="resetBtn" Click="resetBtn_Click">重置</Button>
+        <Button Canvas.Left="262" Canvas.Top="159" x:Name="loginBtn" Click="loginBtn_Click">登陆</Button>
     </Canvas>
 </UserControl>

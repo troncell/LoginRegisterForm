@@ -25,10 +25,6 @@ namespace LoginRegisterForm
         public MainWindow()
         {
             InitializeComponent();
-            var db = new XMLDB();
-          
-
-            db.SaveChanged();
         }
 
 

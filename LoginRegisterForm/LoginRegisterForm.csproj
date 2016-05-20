@@ -58,7 +58,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Entity\Product.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="GameSetting.cs" />
     <Compile Include="RegisterControl.xaml.cs">
@@ -66,7 +65,9 @@
     </Compile>
     <Compile Include="Repository\XMLDB.cs" />
     <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\XmlRepository.cs" />
+    <Compile Include="Service\IUserService.cs" />
+    <Compile Include="Service\UserService.cs" />
+    <Compile Include="SimplePasswordBox.cs" />
     <Page Include="LoginControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
