@@ -18,14 +18,16 @@
             </TextBox.Text>
         </TextBox>
         <Label Canvas.Left="10" Canvas.Top="77">密码:</Label>
-        <TextBox x:Name="passwordBox" Height="21" Width="251" Canvas.Left="10" Canvas.Top="102"  
-                 Text="{Binding Path=Password, ValidatesOnNotifyDataErrors=True}" 
-                 Validation.ErrorTemplate="{StaticResource validationTemplate}"/>
+        <PasswordBox x:Name="passwordBox" Height="21" Width="251" Canvas.Left="10" Canvas.Top="102"  
+                 Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                 local:PasswordHelper.Password="{Binding Password, Mode=TwoWay}" 
+                 local:PasswordHelper.Attach="True"/>
 
         <Label Canvas.Left="10" Canvas.Top="141">密码确认:</Label>
-        <TextBox x:Name="passwordConfirmBox" Height="21" Width="251" Canvas.Left="10" Canvas.Top="171" 
-                 Text="{Binding Path=PasswordConfirm, ValidatesOnNotifyDataErrors=True}" 
-                 Validation.ErrorTemplate="{StaticResource validationTemplate}" />
+        <PasswordBox x:Name="passwordConfirmBox" Height="21" Width="251" Canvas.Left="10" Canvas.Top="171" 
+                 Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                 local:PasswordHelper.Password="{Binding PasswordConfirm, Mode=TwoWay}" 
+                 local:PasswordHelper.Attach="True"/>
         <Button Canvas.Left="184" Canvas.Top="215" x:Name="reset" Click="reset_Click">重置</Button>
         <Button Canvas.Left="233" Canvas.Top="215" x:Name="register" Click="register_Click" RenderTransformOrigin="0.607,2.368">注册</Button>
     </Canvas>

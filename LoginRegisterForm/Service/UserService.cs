@@ -20,7 +20,7 @@ namespace LoginRegisterForm.Service
             var user = XMLDB.Instance.Users.SingleOrDefault(u => u.Username == userName && u.Password == password);
             if(user == null)
             {
-                errors.Add("用户名密码不一至");
+                errors.Add("用户名与密码不一至");
             }
             return user != null;
         }

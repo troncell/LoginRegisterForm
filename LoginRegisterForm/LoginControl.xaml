@@ -12,8 +12,10 @@
                  Text="{Binding UserName, ValidatesOnNotifyDataErrors=True}"
                  Validation.ErrorTemplate="{StaticResource validationTemplate}"/>
         <Label Canvas.Left="10" Canvas.Top="112">密码:</Label>
-        <TextBox x:Name="passwordBox" Height="26" Width="235" Canvas.Left="55" Canvas.Top="111"  Text="{Binding Path=Password, ValidatesOnNotifyDataErrors=True}"
-                 Validation.ErrorTemplate="{StaticResource validationTemplate}"/>
+        <PasswordBox x:Name="passwordBox" Height="26" Width="235" Canvas.Left="55" Canvas.Top="111"  
+                     Validation.ErrorTemplate="{StaticResource validationTemplate}" 
+                     local:PasswordHelper.Password="{Binding Password, Mode=TwoWay}" 
+                     local:PasswordHelper.Attach="True" />
         <Button Canvas.Left="167" Canvas.Top="159" x:Name="resetBtn" Click="resetBtn_Click">重置</Button>
         <Button Canvas.Left="262" Canvas.Top="159" x:Name="loginBtn" Click="loginBtn_Click">登陆</Button>
     </Canvas>

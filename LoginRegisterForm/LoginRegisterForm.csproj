@@ -60,6 +60,7 @@
     </ApplicationDefinition>
     <Compile Include="Entity\User.cs" />
     <Compile Include="GameSetting.cs" />
+    <Compile Include="PasswordHelper.cs" />
     <Compile Include="RegisterControl.xaml.cs">
       <DependentUpon>RegisterControl.xaml</DependentUpon>
     </Compile>
@@ -67,7 +68,6 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\UserService.cs" />
-    <Compile Include="SimplePasswordBox.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Page Include="LoginControl.xaml">
