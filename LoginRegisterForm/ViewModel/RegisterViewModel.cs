@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace LoginRegisterForm.ViewModel
 {
-    public class RegisterViewModel: INotifyDataErrorInfo, INotifyPropertyChanged
+    [ExportNavigable(NavigableContextName = DefaultNavigableContexts.RegisterScreen)]
+
+    public class RegisterViewModel: ViewModelBase, INotifyDataErrorInfo
     {
         private readonly Dictionary<string, ICollection<string>> _validationErrors = new Dictionary<string, ICollection<string>>();
         private UserService m_userService;
@@ -133,18 +135,11 @@ namespace LoginRegisterForm.ViewModel
         }
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaiseErrorsChanged(string propertyName)
         {
             if (ErrorsChanged != null)
                 ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
-        }
-
-        private void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public IEnumerable GetErrors(string propertyName)
@@ -169,10 +164,10 @@ namespace LoginRegisterForm.ViewModel
             Contact = "";
             Password = "";
             PasswordConfirm = "";
-            RaisePropertyChanged(nameof(UserName));
-            RaisePropertyChanged(nameof(Contact));
-            RaisePropertyChanged(nameof(Password));
-            RaisePropertyChanged(nameof(PasswordConfirm));
+            OnPropertyChanged(nameof(UserName));
+            OnPropertyChanged(nameof(Contact));
+            OnPropertyChanged(nameof(Password));
+            OnPropertyChanged(nameof(PasswordConfirm));
             
             _validationErrors.Clear();
             RaiseErrorsChanged(nameof(UserName));

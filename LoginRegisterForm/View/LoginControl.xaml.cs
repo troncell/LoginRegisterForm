@@ -19,7 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LoginRegisterForm
+namespace LoginRegisterForm.View
 {
     /// <summary>
     /// Interaction logic for LoginControl.xaml
@@ -31,8 +31,10 @@ namespace LoginRegisterForm
         public LoginControl()
         {
             InitializeComponent();
-            m_vm = new LoginViewModel();
-            this.DataContext = m_vm;
+            this.Loaded += (s, e) => 
+            {
+                m_vm = this.DataContext as LoginViewModel;
+            };
         }
 
 
@@ -42,7 +44,7 @@ namespace LoginRegisterForm
             Debug.Assert(success == !m_vm.HasErrors);
             if(!m_vm.HasErrors)
             {
-                MessageBox.Show("登陆成功");
+                m_vm.NavigationManager.NavigateTo(DefaultNavigableContexts.LoginSuccessScreen, m_vm.UserName);
                 m_vm.ClearLoginInfo();
             }
           
@@ -50,7 +52,8 @@ namespace LoginRegisterForm
 
         private void resetBtn_Click(object sender, RoutedEventArgs e)
         {
-            m_vm.ClearLoginInfo();
+            // m_vm.ClearLoginInfo();
+            m_vm.NavigationManager.NavigateTo(DefaultNavigableContexts.RegisterScreen);
         }
 
     

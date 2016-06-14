@@ -1,5 +1,6 @@
 ﻿using LoginRegisterForm.Entity;
 using LoginRegisterForm.Repository;
+using LoginRegisterForm.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,17 @@ namespace LoginRegisterForm
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private MainViewModel vm;
+
+        public MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
+            vm = viewModel;
+            this.DataContext = vm;
+            this.Loaded += (s, e) =>
+            {
+                vm.NavigationManager.NavigateTo(DefaultNavigableContexts.LoginScreen);
+            };
         }
 
         protected override void OnTouchLeave(TouchEventArgs e)
@@ -35,6 +44,10 @@ namespace LoginRegisterForm
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
+          
+           
         }
     }
+
+   
 }

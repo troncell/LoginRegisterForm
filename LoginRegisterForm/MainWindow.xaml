@@ -4,19 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LoginRegisterForm"
+        xmlns:vm="clr-namespace:LoginRegisterForm.ViewModel"
+        xmlns:v="clr-namespace:LoginRegisterForm.View"
         xmlns:simple="clr-namespace:Simple.CommonControl;assembly=Simple.CommonControl"
         xmlns:keyboard="clr-namespace:WpfKb.Controls;assembly=WpfKb"
         mc:Ignorable="d"
         Title="MainWindow"  WindowStyle="None" WindowState="Maximized" ResizeMode="NoResize">
     <Viewbox Stretch="Fill">
         <Canvas x:Name="root" Width="1920" Height="1080">
+            <Canvas.Resources>
+                <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+                    <v:LoginControl />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:LoginSuccessViewModel}">
+                    <v:LoginSuccess />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:RegisterViewModel}">
+                    <v:RegisterControl />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:RegisterSuccessViewModel}">
+                    <v:RegisterSuccess />
+                </DataTemplate>
+            </Canvas.Resources>
             <Image Width="1920" Height="1080" Source="Images/bg_login.png" d:IsLocked="True" />
             <Grid Canvas.Left="560" Canvas.Top="154" Width="824" Height="500" >
                 <Image  Source="Images/form_bg.png" Visibility="Visible" d:IsLocked="True"/>
-                <local:LoginControl  Visibility="Collapsed" d:IsLocked="True" />
-                <local:LoginSuccess  Visibility="Collapsed"/>
-                <local:RegisterControl Visibility="Visible" d:IsLocked="True" />
-                <local:RegisterSuccess Visibility="Collapsed" />
+                <ContentControl Content="{Binding NavigationManager.CurrentNavigationContext}" />
             </Grid>
             <Grid  Canvas.Top="648" Canvas.Left="404" Width="1090" Height="426" >
                 <Rectangle Fill="White" RadiusX="10" RadiusY="10" Opacity="60"/>

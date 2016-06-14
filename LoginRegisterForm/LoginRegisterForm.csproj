@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -60,14 +61,22 @@
     </ApplicationDefinition>
     <Compile Include="Entity\User.cs" />
     <Compile Include="GameSetting.cs" />
-    <Compile Include="LoginSuccess.xaml.cs">
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\LoginSuccess.xaml.cs">
       <DependentUpon>LoginSuccess.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Navigation\DefaultNavigableContexts.cs" />
+    <Compile Include="Navigation\ExportNavigableAttribute.cs" />
+    <Compile Include="Navigation\IExportNavigableMetadata.cs" />
+    <Compile Include="Navigation\INavigableContext.cs" />
+    <Compile Include="Navigation\NavigationManager.cs" />
+    <Compile Include="Navigation\RelayCommand.cs" />
     <Compile Include="PasswordHelper.cs" />
-    <Compile Include="RegisterControl.xaml.cs">
+    <Compile Include="View\RegisterControl.xaml.cs">
       <DependentUpon>RegisterControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegisterSuccess.xaml.cs">
+    <Compile Include="View\RegisterSuccess.xaml.cs">
       <DependentUpon>RegisterSuccess.xaml</DependentUpon>
     </Compile>
     <Compile Include="Repository\XMLDB.cs" />
@@ -78,11 +87,11 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\RegisterSuccessViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
-    <Page Include="LoginControl.xaml">
+    <Page Include="View\LoginControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginSuccess.xaml">
+    <Page Include="View\LoginSuccess.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -94,18 +103,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LoginControl.xaml.cs">
+    <Compile Include="View\LoginControl.xaml.cs">
       <DependentUpon>LoginControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="RegisterControl.xaml">
+    <Page Include="View\RegisterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RegisterSuccess.xaml">
+    <Page Include="View\RegisterSuccess.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace LoginRegisterForm.ViewModel
 {
-    public class RegisterSuccessViewModel : INotifyPropertyChanged
+    [ExportNavigable(NavigableContextName = DefaultNavigableContexts.RegisterSuccessScreen)]
+
+    public class RegisterSuccessViewModel : ViewModelBase
     {
         private string m_userName;
         public string UserName
@@ -16,16 +18,15 @@ namespace LoginRegisterForm.ViewModel
             set
             {
                 m_userName = value;
-                RaisePropertyChanged(nameof(UserName));
+                OnPropertyChanged(nameof(UserName));
             }
         }
 
-        private void RaisePropertyChanged(string propertyName)
+        public override void Initialize(object parameter)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            base.Initialize(parameter);
+            UserName = parameter as string;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

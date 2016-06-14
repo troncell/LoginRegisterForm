@@ -20,7 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LoginRegisterForm
+namespace LoginRegisterForm.View
 {
     /// <summary>
     /// Interaction logic for RegisterControl.xaml
@@ -33,9 +33,11 @@ namespace LoginRegisterForm
         public RegisterControl()
         {
             InitializeComponent();
-            m_vm = new RegisterViewModel();
+            this.Loaded += (s, e) => 
+            {
+                m_vm = this.DataContext as RegisterViewModel;
+            };
             m_userService = new UserService();
-            this.DataContext = m_vm;
         }
 
 
@@ -47,8 +49,8 @@ namespace LoginRegisterForm
             if (!m_vm.HasErrors)
             {
                 m_userService.Register(new User { Username = m_vm.UserName,Contact = m_vm.Contact, Password = m_vm.Password});
+                m_vm.NavigationManager.NavigateTo(DefaultNavigableContexts.RegisterSuccessScreen, m_vm.UserName);
                 m_vm.ClearUserInfo();
-                MessageBox.Show("注册成功");
             }
         }
 

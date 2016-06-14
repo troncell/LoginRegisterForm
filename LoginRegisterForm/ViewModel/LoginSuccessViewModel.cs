@@ -7,25 +7,25 @@ using System.Threading.Tasks;
 
 namespace LoginRegisterForm.ViewModel
 {
-    public class LoginSuccessViewModel : INotifyPropertyChanged
+    [ExportNavigable(NavigableContextName = DefaultNavigableContexts.LoginSuccessScreen)]
+    public class LoginSuccessViewModel :ViewModelBase
     {
-        private string m_userName;
+        private string m_userName = "Hello";
         public string UserName
         {
             get { return m_userName; }
             set
             {
                 m_userName = value;
-                RaisePropertyChanged(nameof(UserName));
+                OnPropertyChanged(nameof(UserName));
             }
         }
 
-        private void RaisePropertyChanged(string propertyName)
+        public override void Initialize(object parameter)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            base.Initialize(parameter);
+            UserName = parameter as string;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

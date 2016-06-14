@@ -14,20 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LoginRegisterForm
+namespace LoginRegisterForm.View
 {
     /// <summary>
-    /// Interaction logic for RegisterSuccess.xaml
+    /// Interaction logic for LoginSuccess.xaml
     /// </summary>
-    public partial class RegisterSuccess : UserControl
+    public partial class LoginSuccess : UserControl
     {
-        public RegisterSuccess()
+        public LoginSuccess()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => 
-            {
-                this.DataContext = new RegisterSuccessViewModel();
-            };
         }
+
     }
 }
