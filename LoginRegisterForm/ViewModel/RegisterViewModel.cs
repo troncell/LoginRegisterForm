@@ -48,6 +48,33 @@ namespace LoginRegisterForm.ViewModel
             
         }
 
+        private string m_contact;
+        public string Contact
+        {
+            get { return m_contact; }
+            set
+            {
+                m_contact = value;
+            }
+        }
+
+        private bool ValidateContact([CallerMemberName] string propertyKey = "")
+        {
+            List<string> errors = null;
+            bool isValid = m_userService.ValidateContact(m_contact, out errors);
+            if (!isValid)
+            {
+                _validationErrors[propertyKey] = errors;
+            }
+            else
+            {
+                _validationErrors.Remove(propertyKey);
+            }
+            RaiseErrorsChanged(propertyKey);
+            return errors == null || errors.Count == 0;
+
+        }
+
         private string m_password;
         public string Password
         {
@@ -131,6 +158,7 @@ namespace LoginRegisterForm.ViewModel
         public bool ValidateInputs()
         {
            return ValidateUserName(nameof(UserName)) &&
+                  ValidateContact(nameof(Contact)) &&
                   ValidatePassword(nameof(Password)) &&
                   ValidatePasswordConfirm(nameof(PasswordConfirm));
         }
@@ -138,13 +166,17 @@ namespace LoginRegisterForm.ViewModel
         public void ClearUserInfo()
         {
             UserName = "";
+            Contact = "";
             Password = "";
             PasswordConfirm = "";
             RaisePropertyChanged(nameof(UserName));
+            RaisePropertyChanged(nameof(Contact));
             RaisePropertyChanged(nameof(Password));
             RaisePropertyChanged(nameof(PasswordConfirm));
+            
             _validationErrors.Clear();
             RaiseErrorsChanged(nameof(UserName));
+            RaiseErrorsChanged(nameof(Contact));
             RaiseErrorsChanged(nameof(Password));
             RaiseErrorsChanged(nameof(PasswordConfirm));
         }

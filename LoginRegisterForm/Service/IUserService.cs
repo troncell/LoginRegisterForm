@@ -15,5 +15,6 @@ namespace LoginRegisterForm.Service
         void Register(User user);
         bool Login(string userName, string password, out List<string> errors);
         bool ValidateUserName(string userName, out List<string> errors);
+        bool ValidateContact(string contact, out List<string> errors);
     }
 }

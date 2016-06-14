@@ -17,7 +17,7 @@ namespace LoginRegisterForm.Service
         public bool Login(string userName, string password, out List<string> errors)
         {
             errors = new List<string>();
-            var user = XMLDB.Instance.Users.SingleOrDefault(u => u.Username == userName && u.Password == password);
+            var user = XMLDB.Instance.Users.SingleOrDefault(u => (u.Username == userName || u.Contact == userName) && u.Password == password);
             if(user == null)
             {
                 errors.Add("用户名与密码不一至");
@@ -59,6 +59,16 @@ namespace LoginRegisterForm.Service
                 errors.Add("用户名不能为空");
             if (XMLDB.Instance.Users.Any(u => u.Username == userName))
                 errors.Add("用户名已存在");
+            return errors.Count == 0;
+        }
+
+        public bool ValidateContact(string contact, out List<string> errors)
+        {
+            errors = new List<string>();
+            if (string.IsNullOrEmpty(contact))
+                return true;
+            if(XMLDB.Instance.Users.Any(u =>u.Contact == contact))
+                errors.Add("电话或邮箱已存在");
             return errors.Count == 0;
         }
 

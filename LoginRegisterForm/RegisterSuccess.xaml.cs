@@ -1,5 +1,4 @@
-﻿using LoginRegisterForm.Entity;
-using LoginRegisterForm.Repository;
+﻿using LoginRegisterForm.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,23 +17,17 @@ using System.Windows.Shapes;
 namespace LoginRegisterForm
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for RegisterSuccess.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RegisterSuccess : UserControl
     {
-        public MainWindow()
+        public RegisterSuccess()
         {
             InitializeComponent();
-        }
-
-        protected override void OnTouchLeave(TouchEventArgs e)
-        {
-            base.OnTouchLeave(e);
-        }
-
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            base.OnKeyDown(e);
+            this.Loaded += (s, e) => 
+            {
+                this.DataContext = new RegisterSuccessViewModel();
+            };
         }
     }
 }

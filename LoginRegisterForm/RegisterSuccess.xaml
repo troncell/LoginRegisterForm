@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="LoginRegisterForm.RegisterSuccess"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LoginRegisterForm"
+             mc:Ignorable="d" 
+             d:DesignHeight="0" d:DesignWidth="0">
+    <Canvas>
+        <Canvas.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontSize" Value="50" />
+                <Setter Property="Foreground" Value="#cba41e" />
+                <Setter Property="Height" Value="60" />
+            </Style>
+        </Canvas.Resources>
+        <Image Source="Images/login_success_bird.png" Width="161" Height="116" Canvas.Left="548" Canvas.Top="331" />
+        <Border Canvas.Left="54" Canvas.Top="210" Width="749" >
+            <StackPanel Orientation="Horizontal"    HorizontalAlignment="Center">
+                <TextBlock Text="恭喜" />
+                <TextBlock Text="{Binding UserName}" MaxWidth="400" TextTrimming="CharacterEllipsis" />
+                <TextBlock Text="成为" />
+            </StackPanel>
+        </Border>
+        <Image Source="Images/register_success_text_22.png" Width="295" Height="237" Canvas.Top="110" Canvas.Left="284"  />
+    </Canvas>
+</UserControl>

@@ -41,11 +41,12 @@ namespace LoginRegisterForm
 
         private void register_Click(object sender, RoutedEventArgs e)
         {
+            
             bool success = m_vm.ValidateInputs();
             Debug.Assert(success == !m_vm.HasErrors);
             if (!m_vm.HasErrors)
             {
-                m_userService.Register(new User { Username = m_vm.UserName, Password = m_vm.Password});
+                m_userService.Register(new User { Username = m_vm.UserName,Contact = m_vm.Contact, Password = m_vm.Password});
                 m_vm.ClearUserInfo();
                 MessageBox.Show("注册成功");
             }

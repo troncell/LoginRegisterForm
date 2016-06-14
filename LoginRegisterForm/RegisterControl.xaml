@@ -4,31 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LoginRegisterForm"
+             xmlns:simple="clr-namespace:Simple.CommonControl;assembly=Simple.CommonControl"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="300" >
+             d:DesignHeight="0" d:DesignWidth="0" >
     <Canvas>
-        <Label Canvas.Left="10" Canvas.Top="10">用户名:</Label>
-        <TextBox x:Name="userNameBox" Height="20" Width="251" Canvas.Left="10" Canvas.Top="35" Validation.ErrorTemplate="{StaticResource validationTemplate}">
-            <TextBox.Text>
-                <Binding Path="UserName" >
-                    <Binding.ValidationRules>
-                        <NotifyDataErrorValidationRule  />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <Label Canvas.Left="10" Canvas.Top="77">密码:</Label>
-        <PasswordBox x:Name="passwordBox" Height="21" Width="251" Canvas.Left="10" Canvas.Top="102"  
-                 Validation.ErrorTemplate="{StaticResource validationTemplate}"
-                 local:PasswordHelper.Password="{Binding Password, Mode=TwoWay}" 
-                 local:PasswordHelper.Attach="True"/>
+        <Image Source="Images/register_bird.png" Canvas.Left="60" Canvas.Top="368" Width="57" Height="67"  />
+        <simple:InfoTextBox Canvas.Left="200" Canvas.Top="67" Width="445" Height="60"
+                 Icon="Images/icon_info.png" TextBoxInfo="用户名"
+                 Text="{Binding UserName, ValidatesOnNotifyDataErrors=True}"/>
+        <simple:InfoTextBox Canvas.Left="200" Canvas.Top="144" Width="445"  Height="60"
+                 Icon="Images/icon_info.png" TextBoxInfo="邮箱/手机号"
+                 Text="{Binding Contact, ValidatesOnNotifyDataErrors=True}"/>
 
-        <Label Canvas.Left="10" Canvas.Top="141">密码确认:</Label>
-        <PasswordBox x:Name="passwordConfirmBox" Height="21" Width="251" Canvas.Left="10" Canvas.Top="171" 
-                 Validation.ErrorTemplate="{StaticResource validationTemplate}"
-                 local:PasswordHelper.Password="{Binding PasswordConfirm, Mode=TwoWay}" 
-                 local:PasswordHelper.Attach="True"/>
-        <Button Canvas.Left="184" Canvas.Top="215" x:Name="reset" Click="reset_Click">重置</Button>
-        <Button Canvas.Left="233" Canvas.Top="215" x:Name="register" Click="register_Click" RenderTransformOrigin="0.607,2.368">注册</Button>
+        <simple:InfoPasswordBox Height="60" Width="445" Canvas.Left="200" Canvas.Top="220"  
+                                Icon="Images/icon_info.png" TextBoxInfo="密码"
+                                Text="{Binding Password, ValidatesOnNotifyDataErrors=True}"  />
+
+        <simple:InfoPasswordBox Height="60" Width="445" Canvas.Left="200" Canvas.Top="300"  
+                                Icon="Images/icon_info.png" TextBoxInfo="密码"
+                                Text="{Binding PasswordConfirm, ValidatesOnNotifyDataErrors=True}"  />
+      
+        <Button Canvas.Left="184" Canvas.Top="215" x:Name="reset" Click="reset_Click" Visibility="Hidden">重置</Button>
+        <simple:ImageButton  Canvas.Left="375" Canvas.Top="375" Width="106" Height="48" Source="Images/register_button.png" Click="register_Click" />
     </Canvas>
 </UserControl>
