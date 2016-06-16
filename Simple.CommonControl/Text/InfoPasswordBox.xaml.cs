@@ -19,18 +19,30 @@ namespace Simple.CommonControl
     /// <summary>
     /// Interaction logic for InfoPasswordBox.xaml
     /// </summary>
-    public partial class InfoPasswordBox : TextBox
+    public partial class InfoPasswordBox : UserControl
     {
-        static InfoPasswordBox()
-        {
-            TextProperty.OverrideMetadata(typeof(InfoPasswordBox), new FrameworkPropertyMetadata(new PropertyChangedCallback(TextPropertyChanged)));
-        }
-
         public InfoPasswordBox()
         {
             InitializeComponent();
-            this.Style = FindResource("textStyle") as Style;
-            
+            password.PasswordChanged += Password_PasswordChanged;
+        }
+
+        private void Password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            SetValue(TextProperty, password.Password);
+            TextBoxHelper.SetHasText(password, !string.IsNullOrEmpty(password.Password));
+        }
+
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+                                                               "Text",
+                                                               typeof(string),
+                                                               typeof(InfoPasswordBox),
+                                                               new FrameworkPropertyMetadata { BindsTwoWayByDefault=true });
+
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
         }
 
         public static readonly DependencyProperty TextBoxInfoProperty = DependencyProperty.Register(
@@ -52,62 +64,37 @@ namespace Simple.CommonControl
             get { return (ImageSource)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
-
-        private static readonly DependencyPropertyKey HasTextPropertyKey = DependencyProperty.RegisterReadOnly(
-            "HasText",
-            typeof(bool),
-            typeof(InfoPasswordBox),
-            new FrameworkPropertyMetadata(false));
-
-        public static readonly DependencyProperty HasTextProperty = HasTextPropertyKey.DependencyProperty;
-
-        public bool HasText
-        {
-            get
-            {
-                return (bool)GetValue(HasTextProperty);
-            }
-        }
-
-        public static readonly DependencyProperty PasswordProperty = DependencyProperty.Register("Password", typeof(string), typeof(InfoPasswordBox));
-        public string Password
-        {
-            get { return (string)GetValue(PasswordProperty); }
-            set { SetValue(PasswordProperty, value); }
-        }
-
-        static void TextPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            InfoPasswordBox itb = (InfoPasswordBox)sender;
-
-            bool actuallyHasText = itb.Text.Length > 0;
-            itb.SetValue(PasswordProperty, itb.Text);
-            if (actuallyHasText != itb.HasText)
-            {
-                itb.SetValue(HasTextPropertyKey, actuallyHasText);
-            }
-        }
     }
 
-    public class TextToStar : IValueConverter
+    public class TextBoxHelper : DependencyObject
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public static readonly DependencyProperty HasTextProperty =
+    DependencyProperty.RegisterAttached("HasText",
+    typeof(bool), typeof(TextBoxHelper),
+    new FrameworkPropertyMetadata(false,
+        FrameworkPropertyMetadataOptions.Inherits));
+
+        /// <summary>
+        /// Sets the orientation.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="value">The value.</param>
+        public static void SetHasText(UIElement element, bool value)
         {
-            string password = value as string;
-            if (string.IsNullOrEmpty(password))
-                return "";
-            string stars = "";
-            for (int i = 0; i < password.Length; i++)
-            {
-                stars += "*";
-            }
-            return stars;
+            element.SetValue(HasTextProperty, value);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        /// <summary>
+        /// Gets the orientation.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <returns></returns>
+        public static bool GetHasText(UIElement element)
         {
-            throw new NotImplementedException();
+            return (bool)element.GetValue(HasTextProperty);
         }
+
+
     }
 
 }

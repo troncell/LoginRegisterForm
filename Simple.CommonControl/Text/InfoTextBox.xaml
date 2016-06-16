@@ -53,20 +53,14 @@
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="HasText" Value="False"/>
-                                    <Condition Property="IsFocused" Value="True"/>
-
-                                </MultiTrigger.Conditions>
-                                <MultiTrigger.EnterActions>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Trigger.EnterActions>
                                     <BeginStoryboard Storyboard="{StaticResource enterGotFocus}"/>
-                                </MultiTrigger.EnterActions>
-                                <MultiTrigger.ExitActions>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
                                     <BeginStoryboard Storyboard="{StaticResource exitGotFocus}"/>
-                                </MultiTrigger.ExitActions>
-                            </MultiTrigger>
-
+                                </Trigger.ExitActions>
+                            </Trigger>
                             <Trigger Property="HasText" Value="True">
                                 <Trigger.EnterActions>
                                     <BeginStoryboard Storyboard="{StaticResource enterHasText}"/>
