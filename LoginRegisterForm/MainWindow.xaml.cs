@@ -3,6 +3,7 @@ using LoginRegisterForm.Repository;
 using LoginRegisterForm.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,29 +24,28 @@ namespace LoginRegisterForm
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainViewModel vm;
+        private bool disposed = false;
 
-        public MainWindow(MainViewModel viewModel)
+        private AssemblyCatalog catalog;
+
+        /// <summary>
+        /// Managed Entity Framework composition container used to compose the entity graph
+        /// </summary>
+        private CompositionContainer compositionContainer;
+
+        public MainWindow()
         {
             InitializeComponent();
-            vm = viewModel;
-            this.DataContext = vm;
+         
             this.Loaded += (s, e) =>
             {
+                this.catalog = new AssemblyCatalog(typeof(MainViewModel).Assembly);
+                this.compositionContainer = new CompositionContainer(this.catalog);
+                var vm = this.compositionContainer.GetExportedValue<MainViewModel>();
                 vm.NavigationManager.NavigateTo(DefaultNavigableContexts.LoginScreen);
+                this.DataContext = vm;
+
             };
-        }
-
-        protected override void OnTouchLeave(TouchEventArgs e)
-        {
-            base.OnTouchLeave(e);
-        }
-
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            base.OnKeyDown(e);
-          
-           
         }
     }
 

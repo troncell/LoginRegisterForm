@@ -22,6 +22,6 @@
                 <TextBlock Text="成为" />
             </StackPanel>
         </Border>
-        <Image Source="/Images/register_success_text_22.png" Width="295" Height="237" Canvas.Top="110" Canvas.Left="284"  />
+        <Image Source="/Images/register_success_text.png" Width="295" Height="237" Canvas.Top="110" Canvas.Left="284"  />
     </Canvas>
 </UserControl>

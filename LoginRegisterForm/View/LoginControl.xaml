@@ -12,11 +12,11 @@
     </UserControl.Resources>
     <Canvas>
         <Image Source="/Images/login_moutain.png" Width="161" Height="116" Canvas.Left="569" Canvas.Top="345" />
-        <simple:InfoTextBox Width="445" Canvas.Left="180" Canvas.Top="106" Height="60"
+        <simple:InfoTextBox Width="445" Canvas.Left="180" Canvas.Top="106" Height="60" FontSize="25"
                  Icon="/Images/icon_info.png" TextBoxInfo="用户名"
                  Text="{Binding UserName, ValidatesOnNotifyDataErrors=True}"/>
         <simple:InfoPasswordBox  Height="60" Width="445" Canvas.Left="180" Canvas.Top="208"  
-                                Icon="/Images/icon_info.png" TextBoxInfo="密码"
+                                Icon="/Images/icon_info.png" TextBoxInfo="密码" FontSize="25"
                                 Text="{Binding Password, ValidatesOnNotifyDataErrors=True}"  />
         <simple:ImageButton  Canvas.Left="200" Canvas.Top="318" Width="107" Height="47"
                              Source="/Images/register_link_button.png" 

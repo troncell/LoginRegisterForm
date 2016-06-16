@@ -177,9 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\login_success_text.png" />
-    <Resource Include="Images\login_success_text_2.png" />
     <Resource Include="Images\register_success_text.png" />
-    <Resource Include="Images\register_success_text_22.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\register_bird.png" />

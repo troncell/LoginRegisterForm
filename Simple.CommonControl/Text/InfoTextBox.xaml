@@ -47,8 +47,8 @@
                                 <Image Source="{TemplateBinding Icon}" />
                                 <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" Margin="3" Grid.Column="1" />
                                 <TextBlock Text="{TemplateBinding TextBoxInfo}" x:Name="Message"
-								Foreground="Navy" IsHitTestVisible="False"
-								FontStyle="Italic" Opacity="0.67" HorizontalAlignment="Left" VerticalAlignment="Center"
+								Foreground="DarkGray" IsHitTestVisible="False"
+								 Opacity="0.67" HorizontalAlignment="Left" VerticalAlignment="Center"
 								Margin="6,0,0,0" Grid.Column="1"/>
                             </Grid>
                         </Border>

@@ -7,7 +7,8 @@
         xmlns:vm="clr-namespace:LoginRegisterForm.ViewModel"
         xmlns:v="clr-namespace:LoginRegisterForm.View"
         xmlns:simple="clr-namespace:Simple.CommonControl;assembly=Simple.CommonControl"
-        xmlns:keyboard="clr-namespace:WpfKb.Controls;assembly=WpfKb"
+         xmlns:keyboard="clr-namespace:WpfKb.Controls;assembly=WpfKb"
+
         mc:Ignorable="d"
         Title="MainWindow"  WindowStyle="None" WindowState="Maximized" ResizeMode="NoResize">
     <Viewbox Stretch="Fill">
@@ -35,7 +36,6 @@
                 <Rectangle Fill="White" RadiusX="10" RadiusY="10" Opacity="60"/>
                 <keyboard:OnScreenKeyboard   x:Name="Keyboard"  Visibility="Visible" Width="1010" Height="370" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
-
         </Canvas>
     </Viewbox>
 
